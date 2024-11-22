@@ -74,15 +74,27 @@
     <script>
         document.getElementById('uploadForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const formData = new FormData();
             formData.append('pdfFile', document.getElementById('pdfFile').files[0]);
 
-            const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.text();
-            document.getElementById('message').textContent = result;
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.text();
+                    alert('تم رفع الملف بنجاح!');
+                    location.reload(); // إعادة تحميل الصفحة
+                } else {
+                    const error = await response.text();
+                    alert(`فشل رفع الملف: ${error}`);
+                }
+            } catch (err) {
+                alert('حدث خطأ أثناء الاتصال بالخادم.');
+            }
         });
     </script>
 </body>
