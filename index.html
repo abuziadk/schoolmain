@@ -1,211 +1,208 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة إشعارات المدرسة</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(to right, #e0f7fa, #e8f5e9);
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 30px 10px;
-            background-color: #009688;
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        label {
-            font-weight: bold;
-            margin-top: 15px;
-            display: block;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            transition: 0.3s ease;
-        }
-        button:hover {
-            background-color: #388e3c;
-        }
-        #result {
-            margin: 15px 0;
-            font-size: 1rem;
-            color: #333;
-            text-align: center;
-        }
-        .pdf-container {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        canvas {
-            display: block;
-            max-width: 100%;
-            margin: auto;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        .social-icons a {
-            margin: 0 10px;
-            color: inherit;
-            font-size: 1.2rem;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin: 25px 0 10px;
-            color: #00695c;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة المدرسة - إشعار الدرجات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #f2f2f2;
+    }
+    header {
+      background: linear-gradient(to right, #00695c, #004d40);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #00796b;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background-color: #004d40;
+    }
+    main {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      color: #00695c;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #004d40;
+      color: white;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 1.3rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <img src="bannersch-removebg-preview.png" alt="شعار المدرسة" width="100">
-        <h1>نظام الاستعلام عن إشعارات الفصل</h1>
-        <p>أدخل السجل المدني لعرض إشعار الدرجات</p>
+  <header>
+    <img src="bannersch-removebg-preview.png" alt="شعار المدرسة" width="80">
+    <h1>مدرسة التفوق الأهلية</h1>
+    <p>بوابتك الإلكترونية لمتابعة كل جديد</p>
+  </header>
+
+  <nav>
+    <a href="#grades">الدرجات</a>
+    <a href="#about">عن المدرسة</a>
+    <a href="#teachers">المعلمين</a>
+    <a href="#activities">الأنشطة</a>
+    <a href="#gallery">معرض الصور</a>
+    <a href="#contact">اتصل بنا</a>
+  </nav>
+
+  <main>
+    <section id="grades">
+      <h2 class="section-title">الاستعلام عن درجات الطالب</h2>
+      <p>أدخل السجل المدني لعرض الشهادة:</p>
+      <input type="text" id="studentId" placeholder="أدخل رقم الهوية الوطنية">
+      <button onclick="searchCertificate()">بحث</button>
+      <div id="result"></div>
+      <div id="pdfContainer"></div>
+      <button id="downloadBtn" style="display:none; margin-top: 20px; background-color: #2196F3; color: white; padding: 10px; border: none; border-radius: 5px;">تحميل الشهادة PDF</button>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">عن المدرسة</h2>
+      <p>مدرسة التفوق الأهلية هي مؤسسة تعليمية تهدف إلى تقديم تعليم متميز قائم على القيم الإسلامية والمعايير الأكاديمية الحديثة.</p>
+    </section>
+
+    <section id="teachers">
+      <h2 class="section-title">طاقم المعلمين</h2>
+      <p>يضم فريق المدرسة نخبة من المعلمين والمعلمات ذوي الخبرة والكفاءة العالية في مختلف التخصصات.</p>
+    </section>
+
+    <section id="activities">
+      <h2 class="section-title">الأنشطة الطلابية</h2>
+      <p>تتنوع الأنشطة بين ثقافية، رياضية، اجتماعية وتطوعية تهدف لتنمية مهارات الطالب وصقل شخصيته.</p>
+    </section>
+
+    <section id="gallery">
+      <h2 class="section-title">معرض الصور</h2>
+      <p>قريبًا سيتم عرض صور من فعاليات المدرسة ومعارضها ونشاطاتها المختلفة.</p>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">اتصل بنا</h2>
+      <p>رقم الهاتف: 0555555555</p>
+      <p>البريد الإلكتروني: info@tafawuq.edu.sa</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2024 - مدرسة التفوق الأهلية</p>
+    <p>تصميم وبرمجة: م. خليل أبوحوزه</p>
+    <div class="social-icons">
+      <a href="https://wa.me/+966548884252"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://x.com/abuhawzah/"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.facebook.com/khalil.abuhozah/"><i class="fab fa-facebook"></i></a>
     </div>
+  </footer>
 
-    <div class="container">
-        <label for="studentId">السجل المدني:</label>
-        <input type="text" id="studentId" placeholder="أدخل رقم الهوية الوطنية">
-        <button onclick="searchCertificate()">بحث</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script>
+    let foundPage = null;
+    let pdfDoc = null;
 
-        <div id="result"></div>
-        <div id="pdfContainer" class="pdf-container"></div>
-        <button id="downloadBtn" style="display:none; margin-top: 20px; background-color: #2196F3;" onclick="downloadCertificate()">تحميل الشهادة PDF</button>
-    </div>
+    async function searchCertificate() {
+      const studentId = document.getElementById('studentId').value.trim();
+      const resultDiv = document.getElementById('result');
+      const pdfContainer = document.getElementById('pdfContainer');
+      document.getElementById('downloadBtn').style.display = "none";
+      pdfContainer.innerHTML = "";
+      resultDiv.textContent = "";
 
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2024</p>
-        <p>تصميم وبرمجة: Eng. Khalil Abuhozah</p>
-        <div class="social-icons">
-            <a href="https://wa.me/+966548884252" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://x.com/abuhawzah/"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.facebook.com/khalil.abuhozah/"><i class="fab fa-facebook"></i></a>
-        </div>
-    </footer>
+      if (studentId.length !== 10 || isNaN(studentId)) {
+        resultDiv.textContent = "رقم الهوية غير صحيح. يجب أن يتكون من 10 أرقام.";
+        return;
+      }
 
-    <script>
-        let foundPage = null;
-        let pdfDoc = null;
+      resultDiv.textContent = "جاري البحث...";
+      const pdfFiles = ['uploads/1.pdf', 'uploads/2.pdf', 'uploads/3.pdf'];
+      let certificateFound = false;
 
-        async function searchCertificate() {
-            const studentId = document.getElementById('studentId').value.trim();
-            const resultDiv = document.getElementById('result');
-            const pdfContainer = document.getElementById('pdfContainer');
-            document.getElementById('downloadBtn').style.display = "none";
-            pdfContainer.innerHTML = "";
-            resultDiv.textContent = "";
-
-            if (studentId.length !== 10 || isNaN(studentId)) {
-                resultDiv.textContent = "رقم الهوية غير صحيح. يجب أن يتكون من 10 أرقام.";
-                return;
+      for (const pdfFile of pdfFiles) {
+        try {
+          pdfDoc = await pdfjsLib.getDocument(pdfFile).promise;
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            const page = await pdfDoc.getPage(pageNum);
+            const textContent = await page.getTextContent();
+            const text = textContent.items.map(item => item.str).join(" ");
+            if (text.includes(studentId)) {
+              displayCertificatePage(page, pdfContainer);
+              foundPage = pageNum;
+              document.getElementById('downloadBtn').style.display = "block";
+              certificateFound = true;
+              break;
             }
-
-            resultDiv.textContent = "جاري البحث...";
-            const pdfFiles = [
-                'uploads/1.pdf', 'uploads/2.pdf', 'uploads/3.pdf',
-                'uploads/4.pdf', 'uploads/5.pdf', 'uploads/6.pdf'
-            ];
-            let certificateFound = false;
-
-            for (const pdfFile of pdfFiles) {
-                try {
-                    pdfDoc = await pdfjsLib.getDocument(pdfFile).promise;
-                    for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                        const page = await pdfDoc.getPage(pageNum);
-                        const textContent = await page.getTextContent();
-                        const text = textContent.items.map(item => item.str).join(" ");
-                        if (text.includes(studentId)) {
-                            displayCertificatePage(page, pdfContainer);
-                            foundPage = pageNum;
-                            document.getElementById('downloadBtn').style.display = "block";
-                            certificateFound = true;
-                            break;
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error loading PDF:", error);
-                }
-                if (certificateFound) break;
-            }
-
-            resultDiv.textContent = certificateFound ? "تم العثور على الشهادة." : "لم يتم العثور على شهادة لهذا الرقم.";
+          }
+        } catch (error) {
+          console.error("Error loading PDF:", error);
         }
+        if (certificateFound) break;
+      }
 
-        function displayCertificatePage(page, container) {
-            const viewport = page.getViewport({ scale: 1.5 });
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+      resultDiv.textContent = certificateFound ? "تم العثور على الشهادة." : "لم يتم العثور على شهادة لهذا الرقم.";
+    }
 
-            page.render({
-                canvasContext: context,
-                viewport: viewport
-            }).promise.then(() => {
-                container.appendChild(canvas);
-            });
-        }
+    function displayCertificatePage(page, container) {
+      const viewport = page.getViewport({ scale: 1.5 });
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+        container.appendChild(canvas);
+      });
+    }
 
-        async function downloadCertificate() {
-            if (foundPage && pdfDoc) {
-                const pdfBytes = await pdfDoc.getData();
-                const existingPdfBytes = new Uint8Array(pdfBytes);
-                const pdfDocNew = await PDFLib.PDFDocument.load(existingPdfBytes);
-                const newPdf = await PDFLib.PDFDocument.create();
-                const [copiedPage] = await newPdf.copyPages(pdfDocNew, [foundPage - 1]);
-                newPdf.addPage(copiedPage);
-
-                const newPdfBytes = await newPdf.save();
-                const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
-
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `الشهادة_${foundPage}.pdf`;
-                link.click();
-            }
-        }
-    </script>
+    async function downloadCertificate() {
+      if (foundPage && pdfDoc) {
+        const pdfBytes = await pdfDoc.getData();
+        const existingPdfBytes = new Uint8Array(pdfBytes);
+        const pdfDocNew = await PDFLib.PDFDocument.load(existingPdfBytes);
+        const newPdf = await PDFLib.PDFDocument.create();
+        const [copiedPage] = await newPdf.copyPages(pdfDocNew, [foundPage - 1]);
+        newPdf.addPage(copiedPage);
+        const newPdfBytes = await newPdf.save();
+        const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `الشهادة_${foundPage}.pdf`;
+        link.click();
+      }
+    }
+  </script>
 </body>
 </html>
