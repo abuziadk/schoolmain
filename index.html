@@ -1,63 +1,128 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إشعار درجات الفصل </title>
+    <title>بوابة إشعارات المدرسة</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #e5e4e2; padding: 20px; flex-direction: column; }
-        .container { width: 100%; max-width: 500px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center; }
-        h1 { margin-bottom: 20px; font-size: 1.5rem; color: #333; }
-        label { display: block; margin-bottom: 10px; font-size: 1rem; color: #666; }
-        input[type="text"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
-        button { width: 100%; padding: 12px; font-size: 1rem; color: #fff; background-color: #4CAF50; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; }
-        button:hover { background-color: #45a049; }
-        #result { margin: 15px 0; font-size: 1rem; color: #333; }
-        .pdf-container { width: 100%; max-height: 500px; overflow: auto; border: 1px solid #ddd; margin-top: 20px; border-radius: 5px; }
-        canvas { display: block; max-width: 100%; height: auto; margin: auto; }
-        #downloadBtn { margin-top: 20px; padding: 12px; background-color: #2196F3; }
-        #downloadBtn:hover { background-color: #0b7dda; }
-        footer { margin-top: 30px; text-align: center; color: #666; font-size: 0.9rem; }
-        footer p { margin: 10px 0; }
-        .social-icons a { margin: 0 10px; text-decoration: none; font-size: 1.1rem; }
-        .social-icons a:hover { opacity: 0.8; }
-        .social-icons a.whatsapp { color: #25D366; }
-        .social-icons a.facebook { color: #3b5998; }
-        .social-icons a.x { color: #1D9BF0; }
-        hr { margin: 20px 0; border: 0; border-top: 1px solid #ddd; }
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #e8f5e9);
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 10px;
+            background-color: #009688;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        #result {
+            margin: 15px 0;
+            font-size: 1rem;
+            color: #333;
+            text-align: center;
+        }
+        .pdf-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        canvas {
+            display: block;
+            max-width: 100%;
+            margin: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            color: inherit;
+            font-size: 1.2rem;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin: 25px 0 10px;
+            color: #00695c;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="bannersch-removebg-preview.png" alt="شعار المدرسة" width="100">
+        <h1>نظام الاستعلام عن إشعارات الفصل</h1>
+        <p>أدخل السجل المدني لعرض إشعار الدرجات</p>
+    </div>
+
     <div class="container">
-        <img src="bannersch-removebg-preview.png" alt="logo1" width="150" height="100">
-         <h1><font color="green">إشعار درجات الفصل </font></h1>
-        <hr>
-         <h3><font color="brown">هذا الإشعار يمثل المعدل الفصلي فقط </font></h3>
-        <hr>
-        <label for="studentId"><font color="red">السجل المدني للطالب</font></label>
-        <input type="text" id="studentId" required>
+        <label for="studentId">السجل المدني:</label>
+        <input type="text" id="studentId" placeholder="أدخل رقم الهوية الوطنية">
         <button onclick="searchCertificate()">بحث</button>
 
         <div id="result"></div>
         <div id="pdfContainer" class="pdf-container"></div>
-        <button id="downloadBtn" style="display:none;" onclick="downloadCertificate()">تحميل الشهادة كملف PDF</button>
-        
-       
+        <button id="downloadBtn" style="display:none; margin-top: 20px; background-color: #2196F3;" onclick="downloadCertificate()">تحميل الشهادة PDF</button>
     </div>
 
     <footer>
-        <p><b><i>All rights reserved &copy; 2024</b></i></p>
-        <p><b>Programming and design by Eng.Khalil Abuhozah<i></b></p> 
+        <p>جميع الحقوق محفوظة &copy; 2024</p>
+        <p>تصميم وبرمجة: Eng. Khalil Abuhozah</p>
         <div class="social-icons">
-            <a href="https://wa.me/+966548884252" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://x.com/abuhawzah/" target="_blank" class="x"><img src="twitter-x-logo-png_seeklogo-492396.png" alt="X Logo" style="width: 16px; height: 16px;"></a>
-            <a href="https://www.facebook.com/khalil.abuhozah/" target="_blank" class="facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/+966548884252" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://x.com/abuhawzah/"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://www.facebook.com/khalil.abuhozah/"><i class="fab fa-facebook"></i></a>
         </div>
-        <hr>
     </footer>
 
     <script>
@@ -73,12 +138,15 @@
             resultDiv.textContent = "";
 
             if (studentId.length !== 10 || isNaN(studentId)) {
-                resultDiv.textContent = "لقد أدخلت رقم هوية خاطئ. يجب أن يتكون من 10 أرقام.";
+                resultDiv.textContent = "رقم الهوية غير صحيح. يجب أن يتكون من 10 أرقام.";
                 return;
             }
 
             resultDiv.textContent = "جاري البحث...";
-            const pdfFiles = ['uploads/1.pdf', 'uploads/2.pdf', 'uploads/3.pdf', 'uploads/4.pdf', 'uploads/5.pdf', 'uploads/6.pdf', 'uploads/7.pdf', 'uploads/8.pdf', 'uploads/9.pdf', 'uploads/10.pdf']; // قائمة ملفات PDF
+            const pdfFiles = [
+                'uploads/1.pdf', 'uploads/2.pdf', 'uploads/3.pdf',
+                'uploads/4.pdf', 'uploads/5.pdf', 'uploads/6.pdf'
+            ];
             let certificateFound = false;
 
             for (const pdfFile of pdfFiles) {
@@ -88,7 +156,6 @@
                         const page = await pdfDoc.getPage(pageNum);
                         const textContent = await page.getTextContent();
                         const text = textContent.items.map(item => item.str).join(" ");
-                        
                         if (text.includes(studentId)) {
                             displayCertificatePage(page, pdfContainer);
                             foundPage = pageNum;
@@ -100,11 +167,10 @@
                 } catch (error) {
                     console.error("Error loading PDF:", error);
                 }
-
                 if (certificateFound) break;
             }
 
-            resultDiv.textContent = certificateFound ? "تم العثور على الشهادة." : "لم يتم العثور على شهادة للهوية المدخلة.";
+            resultDiv.textContent = certificateFound ? "تم العثور على الشهادة." : "لم يتم العثور على شهادة لهذا الرقم.";
         }
 
         function displayCertificatePage(page, container) {
@@ -128,7 +194,6 @@
                 const existingPdfBytes = new Uint8Array(pdfBytes);
                 const pdfDocNew = await PDFLib.PDFDocument.load(existingPdfBytes);
                 const newPdf = await PDFLib.PDFDocument.create();
-
                 const [copiedPage] = await newPdf.copyPages(pdfDocNew, [foundPage - 1]);
                 newPdf.addPage(copiedPage);
 
