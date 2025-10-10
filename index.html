@@ -22,7 +22,7 @@
     color:#fff; padding:16px 12px;
   }
   .header .wrap{max-width:1100px;margin:0 auto; display:flex; align-items:center; gap:16px;}
-  .header img{width:76px; height:auto; object-fit:contain;}
+  .header img{width:110px; height:auto; object-fit:contain;}
   .title-box{display:flex; flex-direction:column; gap:4px}
   .title-box h1{margin:0;font-size:1.4rem;letter-spacing:.2px}
   .title-box p{margin:0;opacity:.9}
@@ -38,7 +38,7 @@
   }
   .nav-wrap a:hover{background:#00695c}
   .active{background:#00695c}
-  main{max-width:1100px;margin:22px auto; background:#fff; padding:24px; border-radius:14px; box-shadow:0 8px 18px rgba(0,0,0,.06)}
+  main{max-width:1100px;margin:22px auto; background:black; padding:24px; border-radius:14px; box-shadow:0 8px 18px rgba(0,0,0,.06)}
   h2{color:#00695c;margin-top:0}
   .footer{
     margin-top:28px; background: var(--green-dark); color:#fff; padding:18px 12px;
@@ -56,7 +56,7 @@
 
 <div class="header">
   <div class="wrap">
-    <img src="bannersch-removebg-preview.png" alt="شعار المدرسة">
+    <img src="images/bg2.png" alt="شعار المدرسة">
     <div class="title-box">
       <h1>مدرسة تحفيظ ضمد الإبتدائية والمتوسطة</h1>
       <p>بوابتك الإلكترونية لمتابعة كل جديد</p>
@@ -78,6 +78,13 @@
 <main>
   <h2>مرحبًا بكم</h2>
   <p>نرحب بكم في البوابة الإلكترونية لمدرسة تحفيظ ضمد الإبتدائية والمتوسطة. استخدم شريط التنقل أعلى الصفحة للوصول إلى جميع الأقسام.</p>
+<section id="hero3d" style="height:260px; border-radius:140px; overflow:hidden; position:relative; margin-bottom:16px;">
+  <canvas id="heroCanvas" style="display:block; width:100%; height:100%"></canvas>
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; text-shadow:0 2px 8px rgba(1,0,0,.35);">
+    <div>مرحبًا بكم في مدرسة تحفيظ ضمد الإبتدائية والمتوسطة</div>
+  </div>
+</section>
+
 </main>
 
 <footer class="footer">
@@ -97,6 +104,107 @@
     <div>جميع الحقوق محفوظة &copy; 2024 - مدرسة تحفيظ ضمد الإبتدائية والمتوسطة</div>
   </div>
 </footer>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+
+(() => {
+  const canvas = document.getElementById('heroCanvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 2, 0.1, 100);
+ const texLoader = new THREE.TextureLoader();
+const loadSRGB = (path) => texLoader.load(path, (t)=>{ if('colorSpace' in t) t.colorSpace = THREE.SRGBColorSpace; });
+const earthRadius = 1.0;
+const segments = 96;
+const earthDay   = loadSRGB('images/erth.jpg');   // إلزامي
+const earthBump  = texLoader.load('erth.jpg');   // اختياري
+const earthSpec  = texLoader.load('erth.jpg');   // اختياري (مناطق المحيطات لامعة)
+const cloudsTex  = texLoader.load('erth.jpg'); // اختياري (PNG شفافة)
+const maxAniso = renderer.capabilities.getMaxAnisotropy() || 1;
+[earthDay, earthBump, earthSpec, cloudsTex].forEach(t => t && (t.anisotropy = maxAniso));
+
+ camera.position.set(0, 0, 3.5);
+camera.fov = 50;                // زاوية الرؤية (كبّرها لتوسيع المشهد)
+camera.updateProjectionMatrix();
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  // إضاءة ولون متناسق مع هوية الموقع
+  const light = new THREE.DirectionalLight(0xffffff, 1.1);
+  light.position.set(2, 3, 4);
+  scene.add(light);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+
+  // مجسم 3D خفيف (عُقدة تورس) بلون أخضر المدرسة
+  const geo = new THREE.SphereGeometry(0.9, 94, 94);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x00796b, metalness: 0.2, roughness: 0.25 });
+  const mesh = new THREE.Mesh(geo, mat);
+  mat.normalMap   = new THREE.TextureLoader().load('images/bg2.jpg');
+
+  mat.roughnessMap= new THREE.TextureLoader().load('images/bg.jpg');
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  scene.add(mesh);
+
+  // نقاط خلفية خفيفة (نجوم بسيطة)
+  const starsGeo = new THREE.BufferGeometry();
+  const starCount = 250;
+  const positions = new Float32Array(starCount * 3);
+  for (let i=0; i<starCount*3; i++) positions[i] = (Math.random()-0.5)*12;
+  starsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.015, color: 0xffffff }));
+  scene.add(stars);
+  
+  // تحريك بالفأرة/اللمس
+  let targetX = 0, targetY = 0;
+  function onMove(x, y) {
+    const rect = canvas.getBoundingClientRect();
+    const nx = (x - rect.left) / rect.width  - 0.5;
+    const ny = (y - rect.top)  / rect.height - 0.5;
+    targetX = nx * 0.8;
+    targetY = ny * 0.5;
+  }
+  window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY), { passive:true });
+  window.addEventListener('touchmove', e => {
+    const t = e.touches[0]; if (t) onMove(t.clientX, t.clientY);
+  }, { passive:true });
+
+  // ريسايز
+  function resizeRendererToDisplaySize() {
+    const parent = canvas.parentElement;
+    const width = parent.clientWidth;
+    const height = parent.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+    return needResize;
+  }
+
+  // أنيميشن
+  let rafId;
+  function render() {
+    resizeRendererToDisplaySize();
+    mesh.rotation.x += 0.104 + (targetY - mesh.rotation.x) * 0.02;
+    mesh.rotation.y += 0.006 + (targetX - mesh.rotation.y) * 0.02;
+    stars.rotation.y += 0.0008;
+    renderer.render(scene, camera);
+    rafId = requestAnimationFrame(render);
+  }
+
+  // إيقاف أثناء التبويب المخفي لتوفير البطارية
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else render();
+  });
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  render();
+})();
+
+</script>
 
 </body>
 </html>
