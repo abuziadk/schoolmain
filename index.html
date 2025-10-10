@@ -38,7 +38,7 @@
   }
   .nav-wrap a:hover{background:#00695c}
   .active{background:#00695c}
-  main{max-width:1100px;margin:22px auto; background:black; padding:24px; border-radius:14px; box-shadow:0 8px 18px rgba(0,0,0,.06)}
+  main{max-width:1100px;margin:10px auto; background:black; padding:24px; border-radius:14px; box-shadow:3 8px 18px rgba(1,0,0,.06)}
   h2{color:#00695c;margin-top:0}
   .footer{
     margin-top:28px; background: var(--green-dark); color:#fff; padding:18px 12px;
@@ -63,7 +63,11 @@
     </div>
   </div>
 </div>
-<nav class="navbar">
+<
+
+<main>
+  <h2>مرحبًا بكم</h2>
+nav class="navbar">
   <div class="nav-wrap">
     <a class="active" href="index.html">الرئيسية</a>
     <a class="" href="grades.html">الدرجات</a>
@@ -74,15 +78,6 @@
     <a class="" href="contact.html">اتصل بنا</a>
   </div>
 </nav>
-
-<main>
-  <h2>مرحبًا بكم</h2>
-  <p>نرحب بكم في البوابة الإلكترونية لمدرسة تحفيظ ضمد الإبتدائية والمتوسطة. استخدم شريط التنقل أعلى الصفحة للوصول إلى جميع الأقسام.</p>
-<section id="hero3d" style="height:260px; border-radius:140px; overflow:hidden; position:relative; margin-bottom:16px;">
-  <canvas id="heroCanvas" style="display:block; width:100%; height:100%"></canvas>
-  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; text-shadow:0 2px 8px rgba(1,0,0,.35);">
-  </div>
-</section>
 
 </main>
 
@@ -107,20 +102,7 @@
 <script>
 
 (() => {
-  const canvas = document.getElementById('heroCanvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, 2, 0.1, 100);
- const texLoader = new THREE.TextureLoader();
-const loadSRGB = (path) => texLoader.load(path, (t)=>{ if('colorSpace' in t) t.colorSpace = THREE.SRGBColorSpace; });
-const earthRadius = 1.0;
-const segments = 96;
-const earthDay   = loadSRGB('images/erth.jpg');   // إلزامي
-const earthBump  = texLoader.load('erth.jpg');   // اختياري
-const earthSpec  = texLoader.load('erth.jpg');   // اختياري (مناطق المحيطات لامعة)
-const cloudsTex  = texLoader.load('erth.jpg'); // اختياري (PNG شفافة)
-const maxAniso = renderer.capabilities.getMaxAnisotropy() || 1;
-[earthDay, earthBump, earthSpec, cloudsTex].forEach(t => t && (t.anisotropy = maxAniso));
+  
 
  camera.position.set(0, 0, 3.5);
 camera.fov = 50;                // زاوية الرؤية (كبّرها لتوسيع المشهد)
