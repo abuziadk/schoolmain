@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام حضور الطلاب</title>
+
+<style>
+body {
+    font-family: "Tajawal", sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    text-align: center;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+h2 { color: #1a73e8; margin-bottom: 20px; }
+button {
+    background:#1a73e8;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    margin:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+.section { display:none; margin-top:20px; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background: #1a73e8;
+    color: white;
+}
+.video-box {
+    width:100%;
+    height:auto;
+    background:#000;
+    border-radius:10px;
+    overflow:hidden;
+}
+.qr-container {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+.qr-item {
+    background:#fafafa;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>نظام إدارة حضور الطلاب</h2>
+
+    <!-- أزرار التنقل -->
+    <button onclick="showSection('scan')">مسح QR</button>
+    <button onclick="showSection('generate')">إنشاء QR من Excel</button>
+    <button onclick="showSection('attendance')">سجل الحضور</button>
+    <button onclick="showSection('absent')">الطلاب الغائبون</button>
+	<button onclick="exportAllQRsPDF()">تحميل جميع الرموز PDF</button>
+
+    <!-- قسم المسح -->
+    <div id="scan" class="section">
+        <h3>مسح رمز QR</h3>
+        <div class="video-box">
+            <video id="video" width="100%" autoplay muted playsinline></video>
+        </div>
+        <button onclick="startCamera()">تشغيل الكاميرا</button>
+        <button onclick="stopCamera()" style="background:#d9534f;">إيقاف الكاميرا</button>
+        <p id="scanResult" style="color:#1a73e8; font-weight:bold;"></p>
+    </div>
+
+    <!-- قسم إنشاء QR -->
+    <div id="generate" class="section">
+        <h3>إنشاء رموز QR للطلاب</h3>
+        <input type="file" id="fileInput" accept=".xlsx,.xls">
+        <button onclick="generateQRs()">إنشاء QR</button>
+
+        <div id="qrContainer" class="qr-container"></div>
+    </div>
+
+    <!-- سجل الحضور -->
+    <div id="attendance" class="section">
+        <h3>سجل الحضور</h3>
+        <table id="attendanceTable">
+            <tr>
+                <th>الاسم</th>
+                <th>الرقم المدني</th>
+                <th>الصف</th>
+                <th>الفصل</th>
+                <th>الوقت</th>
+                <th>التاريخ</th>
+            </tr>
+        </table>
+        <button onclick="clearAttendance()" style="background:#d9534f;">مسح السجل</button>
+    </div>
+	<button onclick="exportAttendance()" 
+        style="background:#1a73e8;color:white;border:none;padding:10px 18px;border-radius:8px;margin-top:15px;cursor:pointer;font-size:16px;">
+    تصدير الحضور إلى Excel
+</button>
+
+    <!-- الغياب -->
+    <div id="absent" class="section">
+        <h3>الطلاب الغائبون</h3>
+        <table id="absentTable">
+            <tr>
+                <th>الاسم</th>
+                <th>الرقم المدني</th>
+                <th>الصف</th>
+                <th>الفصل</th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<!-- مكتبات -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+
+<script>
+let students = [];
+let stream;
+
+// إظهار الأقسام
+function showSection(id){
+    document.querySelectorAll(".section").forEach(sec=>sec.style.display="none");
+    document.getElementById(id).style.display="block";
+
+    if(id === "attendance") loadAttendance();
+    if(id === "absent") loadAbsent();
+}
+
+// تشغيل الكاميرا
+async function startCamera(){
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:"environment" }});
+        const video = document.getElementById("video");
+        video.srcObject = stream;
+        video.play();
+        scanQR();
+    } catch(err){
+        alert("تعذر الوصول للكاميرا");
+    }
+}
+
+// إيقاف الكاميرا
+function stopCamera(){
+    if(stream){
+        stream.getTracks().forEach(t=>t.stop());
+    }
+}
+
+// مسح QR
+function scanQR(){
+    const codeReader = new ZXing.BrowserQRCodeReader();
+    const videoElem = document.getElementById("video");
+
+    codeReader.decodeFromVideoDevice(null, "video", (result, err)=>{
+        if(result){
+            document.getElementById("scanResult").innerText = "تم المسح بنجاح";
+            processQR(result.text);
+        }
+    });
+}
+
+// معالجة بيانات QR
+function processQR(text){
+    let obj = {};
+    text.split(";").forEach(item=>{
+        let [key,val] = item.split("=");
+        obj[key.trim()] = val.trim();
+    });
+
+    const found = students.find(s=>s.ID == obj.ID);
+    if(!found){
+        alert("الطالب غير موجود");
+        return;
+    }
+
+    saveAttendance(found);
+    alert("تم تسجيل حضور: " + found.name);
+}
+
+// إنشاء QR
+function generateQRs(){
+    const fileInput = document.getElementById("fileInput");
+    if(fileInput.files.length === 0){
+        alert("اختر ملف Excel");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = e=>{
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, {type:"array"});
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet);
+
+        students = json;
+        localStorage.setItem("students", JSON.stringify(students));
+
+        const container = document.getElementById("qrContainer");
+        container.innerHTML = "";
+
+        students.forEach(s=>{
+            let qrData = `ID=${s.ID};NAME=${s.name};GRADE=${s.grade};CLASS=${s.class}`;
+            let div = document.createElement("div");
+            div.className = "qr-item";
+
+            let p = document.createElement("p");
+            p.innerText = s.name;
+            div.appendChild(p);
+
+            let canvas = document.createElement("canvas");
+            QRCode.toCanvas(canvas, qrData, { width:150 });
+            div.appendChild(canvas);
+
+            container.appendChild(div);
+        });
+
+        alert("تم إنشاء QR لجميع الطلاب");
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+// حفظ الحضور
+function saveAttendance(st){
+    let attendance = JSON.parse(localStorage.getItem("attendance") || "[]");
+
+    attendance.push({
+        name: st.name,
+        ID: st.ID,
+        grade: st.grade,
+        class: st.class,
+        time: new Date().toLocaleTimeString(),
+        date: new Date().toLocaleDateString()
+    });
+
+    localStorage.setItem("attendance", JSON.stringify(attendance));
+}
+
+// تحميل سجل الحضور
+function loadAttendance(){
+    let table = document.getElementById("attendanceTable");
+    table.innerHTML = `
+        <tr>
+            <th>الاسم</th>
+            <th>الرقم المدني</th>
+            <th>الصف</th>
+            <th>الفصل</th>
+            <th>الوقت</th>
+            <th>التاريخ</th>
+        </tr>`;
+
+    let data = JSON.parse(localStorage.getItem("attendance") || "[]");
+
+    data.forEach(r=>{
+        table.innerHTML += `
+            <tr>
+                <td>${r.name}</td>
+                <td>${r.ID}</td>
+                <td>${r.grade}</td>
+                <td>${r.class}</td>
+                <td>${r.time}</td>
+                <td>${r.date}</td>
+            </tr>`;
+    });
+}
+
+// مسح السجل
+function clearAttendance(){
+    if(confirm("مسح السجل؟")){
+        localStorage.removeItem("attendance");
+        loadAttendance();
+    }
+}
+
+// الغياب
+function loadAbsent(){
+    let absentTable = document.getElementById("absentTable");
+
+    absentTable.innerHTML = `
+        <tr>
+            <th>الاسم</th>
+            <th>الرقم المدني</th>
+            <th>الصف</th>
+            <th>الفصل</th>
+        </tr>`;
+
+    let students = JSON.parse(localStorage.getItem("students") || "[]");
+    let attendance = JSON.parse(localStorage.getItem("attendance") || "[]");
+
+    let presentIDs = attendance.map(a=>a.ID);
+    let absent = students.filter(s=>!presentIDs.includes(String(s.ID)));
+
+    absent.forEach(s=>{
+        absentTable.innerHTML += `
+            <tr>
+                <td>${s.name}</td>
+                <td>${s.ID}</td>
+                <td>${s.grade}</td>
+                <td>${s.class}</td>
+            </tr>`;
+    });
+}
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+function exportAttendance() {
+    let attendance = JSON.parse(localStorage.getItem("attendance") || "[]");
+
+    if (attendance.length === 0) {
+        alert("لا توجد بيانات لتصديرها");
+        return;
+    }
+
+    let sheetData = attendance.map(item => ({
+        ID: item.id,
+        Name: item.name,
+        Grade: item.grade,
+        Class: item.class,
+        Time: item.time,
+        Date: item.date
+    }));
+
+    let ws = XLSX.utils.json_to_sheet(sheetData);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Attendance");
+
+    XLSX.writeFile(wb, "سجل_الحضور.xlsx");
+}
+</script>
+
+</body>
+</html>
