@@ -12,23 +12,63 @@
       background:#f6f7f8;
       color:#111;
     }
+
+    /* ===== Header with Logo ===== */
     header{
-      padding:16px 18px;
+      padding:14px 16px;
       background:#0B6E4F;
       color:#fff;
+    }
+    .header-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand{
+      flex:1;
+      min-width:0;
     }
     header h1{
       margin:0;
       font-size:18px;
       font-weight:800;
+      line-height:1.4;
     }
     header p{
       margin:6px 0 0;
       font-size:14px;
       opacity:.95;
-      line-height:1.6;
+      line-height:1.7;
+    }
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:14px;
+      background:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
+    @media (max-width: 520px){
+      .header-inner{ gap:10px; }
+      .logo{ width:56px; height:56px; border-radius:12px; }
+      header h1{ font-size:16px; }
+      header p{ font-size:13px; }
+    }
+
+    /* ===== Layout ===== */
     .wrap{
       padding:14px;
       max-width:1200px;
@@ -140,8 +180,19 @@
 
 <body>
   <header>
-    <h1>#احفظه_معنا | خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</h1>
-    <p>ابحث عن أقرب صندوق، ثم اضغط “الاتجاهات” لفتح Google Maps وتحديد الطريق من موقعك الحالي.</p>
+    <div class="header-inner">
+      <!-- الشعار: تأكد أن الملف mushaf.png موجود بجانب ملف الـ HTML -->
+      <div class="logo" title="جمعية العناية بالمصحف الشريف">
+        <img src="mushaf.jpg" alt="شعار جمعية العناية بالمصحف الشريف">
+      </div>
+
+      <div class="brand">
+        <h1>#احفظه_معنا | خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</h1>
+<p>
+<strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> – 📞 0580756777
+</p>
+      </div>
+    </div>
   </header>
 
   <div class="wrap">
@@ -171,7 +222,7 @@
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="خريطة صناديق حفظ المصاحف – منطقة جازان">
+          title="خريطة صناديق حفظ المصاحف القديمة – منطقة جازان">
         </iframe>
       </div>
     </main>
@@ -198,7 +249,7 @@
       { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.550000, lng: 42.850000, note: "بجوار جامع الرحمة (إحداثيات تقديرية)" },
       { name: "صندوق حفظ المصاحف القديمة – هروب", lat: 17.446735, lng: 42.875393, note: "بجوار جامع حمزة بن عبدالمطلب" },
       { name: "صندوق حفظ المصاحف القديمة – الطوال", lat: 16.528753, lng: 42.967049, note: "بجوار جامع الأوسط" },
-      { name: "صندوق حفظ المصاحف القديمة– الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" },
+      { name: "صندوق حفظ المصاحف القديمة – الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" },
     ];
 
     const listEl = document.getElementById("list");
