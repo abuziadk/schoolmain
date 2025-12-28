@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>خريطة صناديق حفظ المصاحف القديمة - لجمعية العناية بالمصحف الشريف بمنطقة جازان </title>
+  <title>خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</title>
 
   <style>
     :root{
@@ -13,66 +13,59 @@
       --card:#ffffff;
       --text:#111;
       --muted:#444;
-      --shadow: 0 10px 26px rgba(0,0,0,.10);
-      --shadow2: 0 8px 22px rgba(0,0,0,.18);
+      --shadow:0 10px 26px rgba(0,0,0,.10);
+      --shadow2:0 8px 22px rgba(0,0,0,.18);
       --radius:16px;
     }
 
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Tajawal", "Cairo", Arial, sans-serif;
+      font-family:"Tajawal","Cairo",system-ui,-apple-system,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
     }
 
-    /* ===== HEADER (Polished) ===== */
+    /* ================= HEADER ================= */
     header{
-      color:#fff;
       background:
-        radial-gradient(1200px 420px at 20% 0%, rgba(255,255,255,.18), transparent 60%),
-        linear-gradient(135deg, var(--green), var(--green2));
-      border-bottom: 1px solid rgba(255,255,255,.18);
+        radial-gradient(900px 320px at 20% 0%, rgba(255,255,255,.16), transparent 60%),
+        linear-gradient(135deg,var(--green),var(--green2));
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.18);
     }
 
     .header-inner{
       max-width:1200px;
-      margin:0 auto;
-      padding:14px 14px 16px;
+      margin:auto;
+      padding:12px 14px;
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
     }
 
     .media-card{
-      width:86px;
-      height:86px;
-      border-radius:18px;
-      background: rgba(255,255,255,.95);
+      width:72px;
+      height:72px;
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+      box-shadow:var(--shadow2);
+      flex:0 0 auto;
       display:flex;
       align-items:center;
       justify-content:center;
-      overflow:hidden;
-      box-shadow: var(--shadow2);
-      flex:0 0 auto;
-      border: 1px solid rgba(11,110,79,.12);
     }
+
     .media-card img{
       width:100%;
       height:100%;
+      object-fit:cover;
       display:block;
-      object-fit:cover;
     }
 
-    /* صندوق (يمين) */
-    .box-image img{
-      object-fit:cover;
-    }
-
-    /* شعار (يسار) */
     .logo img{
       object-fit:contain;
       padding:8px;
-      background:#fff;
     }
 
     .brand{
@@ -80,123 +73,83 @@
       min-width:0;
     }
 
-    .headline{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin:0 0 6px;
-      line-height:1.35;
-    }
-
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 10px;
+      display:inline-block;
+      padding:5px 10px;
       border-radius:999px;
-      background: rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.25);
+      font-size:12px;
       font-weight:800;
-      font-size:13px;
-      letter-spacing:.2px;
+      margin-bottom:6px;
       white-space:nowrap;
     }
 
     h1{
-      margin:0;
-      font-size:18px;
+      margin:0 0 4px;
+      font-size:17px;
       font-weight:900;
       line-height:1.35;
-      text-shadow: 0 2px 10px rgba(0,0,0,.14);
-      overflow:hidden;
-      text-overflow:ellipsis;
     }
 
     .sub{
       margin:0;
-      font-size:14px;
-      opacity:.98;
-      line-height:1.75;
+      font-size:13px;
+      line-height:1.6;
+      opacity:.95;
     }
 
-    .contact-line{
+    .contact{
       margin-top:6px;
       display:flex;
-      gap:10px;
+      gap:8px;
       flex-wrap:wrap;
       align-items:center;
-      opacity:.98;
     }
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
+      padding:6px 10px;
       border-radius:12px;
-      background: rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.25);
+      font-size:12px;
       font-weight:800;
-      font-size:13px;
       white-space:nowrap;
     }
 
     .pill a{
       color:#fff;
       text-decoration:none;
+      border-bottom:1px dashed rgba(255,255,255,.6);
       font-weight:900;
-      border-bottom:1px dashed rgba(255,255,255,.55);
-    }
-    .pill a:hover{
-      border-bottom-color:#fff;
     }
 
-    @media (max-width: 720px){
+    /* ===== Mobile Optimization ===== */
+    @media (max-width:520px){
       .header-inner{
+        padding:10px 12px;
         align-items:flex-start;
       }
       .media-card{
-        width:64px;
-        height:64px;
-        border-radius:16px;
+        width:58px;
+        height:58px;
       }
-      h1{ font-size:16px; }
-      .sub{ font-size:13px; }
+      h1{ font-size:15px; }
+      .sub{ font-size:12.5px; }
+      .badge{ font-size:11px; }
+      .pill{ font-size:11.5px; }
     }
 
-    @media (max-width: 520px){
-      .header-inner{
-        flex-direction:column;
-        align-items:stretch;
-        gap:10px;
-      }
-      .header-top{
-        display:flex;
-        gap:10px;
-        align-items:center;
-        justify-content:space-between;
-      }
-      .brand{
-        order:3;
-      }
-      .box-image{ order:1; }
-      .logo{ order:2; }
-      .media-card{
-        width:62px;
-        height:62px;
-      }
-    }
-
-    /* ===== Layout ===== */
+    /* ================= LAYOUT ================= */
     .wrap{
       padding:14px;
       max-width:1200px;
-      margin:0 auto;
+      margin:auto;
       display:grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns:360px 1fr;
       gap:12px;
     }
+
     @media (max-width:950px){
       .wrap{ grid-template-columns:1fr; }
     }
@@ -204,27 +157,12 @@
     .card{
       background:var(--card);
       border-radius:var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
 
-    .map{
-      position:relative;
-      width:100%;
-      padding-top:62%;
-      background:#eee;
-    }
-    .map iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
+    .panel{ padding:12px; }
 
-    .panel{
-      padding:12px;
-    }
     .panel h2{
       margin:0 0 10px;
       font-size:16px;
@@ -234,14 +172,13 @@
 
     .search{
       width:100%;
-      box-sizing:border-box;
       padding:10px 12px;
       border:1px solid #ddd;
       border-radius:12px;
       font-size:14px;
-      outline:none;
       margin-bottom:10px;
-      background:#fff;
+      outline:none;
+      box-sizing:border-box;
     }
     .search:focus{
       border-color: rgba(11,110,79,.55);
@@ -252,195 +189,209 @@
       display:flex;
       flex-direction:column;
       gap:10px;
-      max-height:70vh;
+      max-height:62vh;
       overflow:auto;
       padding-right:2px;
     }
+
     .item{
       border:1px solid #e7e7e7;
       border-radius:14px;
       padding:10px;
       background:#fff;
     }
+
     .item .name{
       font-weight:900;
       font-size:14px;
-      margin:0 0 6px;
+      margin:0 0 4px;
       line-height:1.5;
     }
+
     .item .meta{
-      margin:0 0 10px;
-      color:var(--muted);
       font-size:13px;
+      color:var(--muted);
+      margin:0 0 8px;
       line-height:1.6;
     }
+
     .actions{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
     }
+
     .btn{
-      display:inline-block;
       padding:8px 10px;
       border-radius:12px;
-      border:1px solid var(--green);
       background:var(--green);
       color:#fff;
-      text-decoration:none;
-      font-weight:900;
       font-size:13px;
-      white-space:nowrap;
-      box-shadow: 0 6px 14px rgba(11,110,79,.18);
+      font-weight:900;
+      text-decoration:none;
+      border:1px solid var(--green);
+      display:inline-block;
     }
-    .btn:hover{
-      filter: brightness(0.98);
-      transform: translateY(-1px);
-    }
+
     .btn.secondary{
       background:#fff;
       color:var(--green);
-      box-shadow:none;
     }
-    .btn.secondary:hover{
-      background: rgba(11,110,79,.06);
+
+    .map{
+      position:relative;
+      width:100%;
+      padding-top:62%;
+      background:#eee;
+    }
+
+    .map iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
     }
 
     footer{
-      margin:16px auto 0;
-      padding:14px;
+      margin:14px auto;
       text-align:center;
       font-size:13px;
       color:#444;
+      padding:0 12px 14px;
     }
     footer a{
       color:var(--green);
       font-weight:900;
       text-decoration:none;
-      border-bottom:1px dashed rgba(11,110,79,.5);
-    }
-    footer a:hover{
-      border-bottom-color:var(--green);
+      border-bottom:1px dashed rgba(11,110,79,.55);
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="header-inner">
-  <!-- يسار: صورة الصندوق -->
-  <div class="media-card box-image" title="صندوق جمع المصاحف">
-    <img src="mushaf.jpg" alt="صندوق جمع المصاحف">
-  </div>
+<header>
+  <div class="header-inner">
+    <!-- يسار: صورة الصندوق (عدّل الاسم حسب ملفك) -->
+    <div class="media-card" title="صندوق جمع المصاحف">
+      <img src="Box.jpg" alt="صندوق جمع المصاحف">
+    </div>
 
-  <!-- وسط: النص -->
-  <div class="brand">
-    <div class="headline">
+    <!-- وسط: النص -->
+    <div class="brand">
       <span class="badge">#احفظه_معنا</span>
       <h1>خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</h1>
+      <p class="sub">ابحث عن أقرب صندوق، ثم اضغط “الاتجاهات” لفتح Google Maps وتحديد الطريق من موقعك الحالي.</p>
+      <div class="contact">
+        <span class="pill">جمعية العناية بالمصحف الشريف بمنطقة جازان</span>
+        <span class="pill">📞 <a href="tel:0580756777">0580756777</a></span>
+      </div>
     </div>
 
-    <p class="sub">
-    </p>
-
-    <div class="contact-line">
-      <span class="pill">جمعية العناية بالمصحف الشريف بمنطقة جازان</span>
-      <span class="pill">📞 <a href="tel:0580756777">0580756777</a></span>
+    <!-- يمين: شعار الجمعية (عدّل الاسم حسب ملفك) -->
+    <div class="media-card logo" title="شعار الجمعية">
+      <img src="mushaf.png" alt="شعار جمعية العناية بالمصحف الشريف">
     </div>
   </div>
+</header>
 
-  <!-- يمين: شعار الجمعية -->
-  <div class="media-card logo" title="شعار جمعية العناية بالمصحف الشريف">
-    <img src="Box.jpg" alt="شعار جمعية العناية بالمصحف الشريف">
-  </div>
+<div class="wrap">
+
+  <!-- القائمة -->
+  <aside class="card">
+    <div class="panel">
+      <h2>المحافظات والمواقع</h2>
+      <input id="q" class="search" type="search" placeholder="ابحث باسم المحافظة… (مثال: صبيا / بيش / فيفا)" />
+      <div id="list" class="list"></div>
+    </div>
+  </aside>
+
+  <!-- الخريطة -->
+  <main class="card">
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1QE5-MUYNlbb9j7j3kiTLEBJb1MlTVNc"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="خريطة صناديق حفظ المصاحف القديمة – منطقة جازان">
+      </iframe>
+    </div>
+  </main>
+
 </div>
 
-  </header>
+<footer>
+  بإشراف <strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> |
+  للتواصل: <a href="tel:0580756777">0580756777</a>
+</footer>
 
-  <div class="wrap">
+<script>
+  // ===================== DATA =====================
+  const places = [
+    { name: "صندوق حفظ المصاحف القديمة – جيزان", lat: 16.899836, lng: 42.552330, note: "بجوار جامع الأميرة صيتة" },
+    { name: "صندوق حفظ المصاحف القديمة – صبيا", lat: 17.1589463, lng: 42.6261863, note: "بجوار جامع الدرسي بمدينة صبيا" },
+    { name: "صندوق حفظ المصاحف القديمة – ضمد", lat: 17.112385, lng: 42.777718, note: "حي الزاهر بجوار مسجد الهاتف شرق البنك الأهلي" },
+    { name: "صندوق حفظ المصاحف القديمة – صامطة", lat: 16.599133, lng: 42.935261, note: "بجوار جامع العليا حي السنيد" },
+    { name: "صندوق حفظ المصاحف القديمة – أحد المسارحة", lat: 16.702896, lng: 42.954578, note: "بجوار جامع الدحمان" },
+    { name: "صندوق حفظ المصاحف القديمة – العارضة", lat: 17.0362635, lng: 43.0862932, note: "بجوار جامع الراجحي" },
+    { name: "صندوق حفظ المصاحف القديمة – العيدابي", lat: 17.2331150, lng: 42.9401466, note: "بجوار جامع أبو بكر الصديق" },
+    { name: "صندوق حفظ المصاحف القديمة – بيش", lat: 17.370344, lng: 42.539795, note: "بجوار جامع الراجحي بمدينة بيش" },
+    { name: "صندوق حفظ المصاحف القديمة – أبو عريش", lat: 16.967049, lng: 42.837952, note: "بجوار جامع الميرابي" },
+    { name: "صندوق حفظ المصاحف القديمة – فيفا", lat: 17.2551397, lng: 43.0960266, note: "بجوار جامع أبو بكر الصديق بمدينة فيفا" },
+    { name: "صندوق حفظ المصاحف القديمة – الداير بني مالك", lat: 17.336403, lng: 43.137497, note: "بجوار جامع خادم الحرمين الشريفين" },
+    { name: "صندوق حفظ المصاحف القديمة – عيبان بلغازي", lat: 17.278406, lng: 43.050171, note: "بجوار جامع عيبان" },
+    { name: "صندوق حفظ المصاحف القديمة – الدرب", lat: 17.732662, lng: 42.249622, note: "بجوار جامع الأميرة الجوهرة" },
+    { name: "صندوق حفظ المصاحف القديمة – فرسان", lat: 16.6970000, lng: 41.9815000, note: "فرسان – قريب من جامع الشيخ هادي الراجحي (مرجع عام)" },
+    { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.6169984, lng: 42.8296643, note: "الريث – قريب من جامع الرحمة (مرجع عام)" },
+    { name: "صندوق حفظ المصاحف القديمة – هروب", lat: 17.446735, lng: 42.875393, note: "بجوار جامع حمزة بن عبدالمطلب" },
+    { name: "صندوق حفظ المصاحف القديمة – الطوال", lat: 16.528753, lng: 42.967049, note: "بجوار جامع الأوسط" },
+    { name: "صندوق حفظ المصاحف القديمة – الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" }
+  ];
 
-    <!-- القائمة -->
-    <aside class="card">
-      <div class="panel">
-        <h2>المحافظات والمواقع</h2>
-        <input id="q" class="search" type="search" placeholder="ابحث باسم المحافظة… (مثال: صبيا / بيش / فيفا)" />
-        <div id="list" class="list"></div>
-      </div>
-    </aside>
+  // ===================== UI =====================
+  const listEl = document.getElementById("list");
+  const qEl = document.getElementById("q");
 
-    <!-- الخريطة -->
-    <main class="card">
-      <div class="map">
-        <iframe
-          src="https://www.google.com/maps/d/u/0/embed?mid=1QE5-MUYNlbb9j7j3kiTLEBJb1MlTVNc"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="خريطة صناديق حفظ المصاحف القديمة – منطقة جازان">
-        </iframe>
-      </div>
-    </main>
+  function mapsPlaceLink(lat, lng){
+    return `https://maps.google.com/?q=${lat},${lng}`;
+  }
+  function mapsDirectionsLink(lat, lng){
+    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+  }
 
-  </div>
+  function render(filterText=""){
+    listEl.innerHTML = "";
+    const ft = filterText.trim().toLowerCase();
 
-  <footer>
-    بإشراف <strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> |
-    للتواصل: <a href="tel:0580756777">0580756777</a>
-  </footer>
+    const results = places.filter(p => !ft || p.name.toLowerCase().includes(ft) || (p.note||"").toLowerCase().includes(ft));
 
-  <script>
-    const places = [
-      { name: "صندوق حفظ المصاحف القديمة – جيزان", lat: 16.899836, lng: 42.552330, note: "بجوار جامع الأميرة صيتة" },
-      { name: "صندوق حفظ المصاحف القديمة – صبيا", lat: 17.1589463, lng: 42.6261863, note: "بجوار جامع الدرسي بمدينة صبيا" },
-      { name: "صندوق حفظ المصاحف القديمة – ضمد", lat: 17.112385, lng: 42.777718, note: "حي الزاهر بجوار مسجد الهاتف شرق البنك الأهلي" },
-      { name: "صندوق حفظ المصاحف القديمة – صامطة", lat: 16.599133, lng: 42.935261, note: "بجوار جامع العليا حي السنيد" },
-      { name: "صندوق حفظ المصاحف القديمة – أحد المسارحة", lat: 16.702896, lng: 42.954578, note: "بجوار جامع الدحمان" },
-      { name: "صندوق حفظ المصاحف القديمة – العارضة", lat: 17.0362635, lng: 43.0862932, note: "بجوار جامع الراجحي" },
-      { name: "صندوق حفظ المصاحف القديمة – العيدابي", lat: 17.2331150, lng: 42.9401466, note: "بجوار جامع أبو بكر الصديق" },
-      { name: "صندوق حفظ المصاحف القديمة – بيش", lat: 17.370344, lng: 42.539795, note: "بجوار جامع الراجحي بمدينة بيش" },
-      { name: "صندوق حفظ المصاحف القديمة – أبو عريش", lat: 16.967049, lng: 42.837952, note: "بجوار جامع الميرابي" },
-      { name: "صندوق حفظ المصاحف القديمة – فيفا", lat: 17.2551397, lng: 43.0960266, note: "بجوار جامع أبو بكر الصديق بمدينة فيفا" },
-      { name: "صندوق حفظ المصاحف القديمة – الداير بني مالك", lat: 17.336403, lng: 43.137497, note: "بجوار جامع خادم الحرمين الشريفين" },
-      { name: "صندوق حفظ المصاحف القديمة – عيبان بلغازي", lat: 17.278406, lng: 43.050171, note: "بجوار جامع عيبان" },
-      { name: "صندوق حفظ المصاحف القديمة – الدرب", lat: 17.732662, lng: 42.249622, note: "بجوار جامع الأميرة الجوهرة" },
-      { name: "صندوق حفظ المصاحف القديمة – فرسان", lat: 16.6970000, lng: 41.9815000, note: "جزيرة فرسان – قريب من جامع الشيخ هادي الراجحي" },
-      { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.6169984, lng: 42.8296643, note: "محافظة الريث – قريب من جامع الرحمة" },
-      { name: "صندوق حفظ المصاحف القديمة – هروب", lat: 17.446735, lng: 42.875393, note: "بجوار جامع حمزة بن عبدالمطلب" },
-      { name: "صندوق حفظ المصاحف القديمة – الطوال", lat: 16.528753, lng: 42.967049, note: "بجوار جامع الأوسط" },
-      { name: "صندوق حفظ المصاحف القديمة – الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" }
-    ];
+    results.forEach(p => {
+      const item = document.createElement("div");
+      item.className = "item";
+      item.innerHTML = `
+        <p class="name">${p.name}</p>
+        <p class="meta">${p.note}<br><span style="opacity:.8">(${p.lat.toFixed(6)}, ${p.lng.toFixed(6)})</span></p>
+        <div class="actions">
+          <a class="btn" target="_blank" rel="noopener" href="${mapsDirectionsLink(p.lat, p.lng)}">الاتجاهات</a>
+          <a class="btn secondary" target="_blank" rel="noopener" href="${mapsPlaceLink(p.lat, p.lng)}">فتح الموقع</a>
+        </div>
+      `;
+      listEl.appendChild(item);
+    });
 
-    const listEl = document.getElementById("list");
-    const qEl = document.getElementById("q");
-
-    const mapsPlaceLink = (lat,lng)=>`https://maps.google.com/?q=${lat},${lng}`;
-    const mapsDirectionsLink = (lat,lng)=>`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-
-    function render(filterText=""){
-      listEl.innerHTML = "";
-      const ft = filterText.trim().toLowerCase();
-      const items = places.filter(p => !ft || p.name.toLowerCase().includes(ft));
-
-      items.forEach(p=>{
-        const item=document.createElement("div");
-        item.className="item";
-        item.innerHTML=`
-          <p class="name">${p.name}</p>
-          <p class="meta">${p.note}<br><span style="opacity:.8">(${p.lat.toFixed(6)}, ${p.lng.toFixed(6)})</span></p>
-          <div class="actions">
-            <a class="btn" target="_blank" rel="noopener" href="${mapsDirectionsLink(p.lat,p.lng)}">الاتجاهات</a>
-            <a class="btn secondary" target="_blank" rel="noopener" href="${mapsPlaceLink(p.lat,p.lng)}">فتح الموقع</a>
-          </div>`;
-        listEl.appendChild(item);
-      });
-
-      if(!items.length){
-        listEl.innerHTML=`<div class="item"><p class="name">لا توجد نتائج</p><p class="meta">جرّب كلمة بحث أخرى.</p></div>`;
-      }
+    if(!results.length){
+      listEl.innerHTML = `<div class="item">
+        <p class="name">لا توجد نتائج</p>
+        <p class="meta">جرّب كلمة بحث أخرى.</p>
+      </div>`;
     }
+  }
 
-    qEl.addEventListener("input",e=>render(e.target.value));
-    render();
-  </script>
+  qEl.addEventListener("input", (e) => render(e.target.value));
+  render();
+</script>
+
 </body>
 </html>
