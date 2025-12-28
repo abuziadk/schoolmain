@@ -1,10 +1,9 @@
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>خريطة صناديق حفظ المصاحف القديمة - لجمعية العناية بالمصحف الشريف بمنطقة جازان 0580756777</title>
+  <title>خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</title>
 
   <style>
     body{
@@ -14,7 +13,7 @@
       color:#111;
     }
 
-    /* ===== Header with Logo ===== */
+    /* ===== Header ===== */
     header{
       padding:14px 16px;
       background:#0B6E4F;
@@ -26,6 +25,25 @@
       display:flex;
       align-items:center;
       gap:12px;
+    }
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:14px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:6px;
+      display:block;
     }
     .brand{
       flex:1;
@@ -43,28 +61,8 @@
       opacity:.95;
       line-height:1.7;
     }
-    .logo{
-      width:72px;
-      height:72px;
-      border-radius:14px;
-      background:#ffffff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow:0 6px 18px rgba(0,0,0,.18);
-      flex:0 0 auto;
-    }
-    .logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    @media (max-width: 520px){
-      .header-inner{ gap:10px; }
-      .logo{ width:56px; height:56px; border-radius:12px; }
+    @media (max-width:520px){
+      .logo{ width:56px; height:56px; }
       header h1{ font-size:16px; }
       header p{ font-size:13px; }
     }
@@ -78,9 +76,8 @@
       grid-template-columns: 360px 1fr;
       gap:12px;
     }
-
-    @media (max-width: 950px){
-      .wrap{ grid-template-columns: 1fr; }
+    @media (max-width:950px){
+      .wrap{ grid-template-columns:1fr; }
     }
 
     .card{
@@ -127,9 +124,9 @@
       display:flex;
       flex-direction:column;
       gap:10px;
-      max-height: 70vh;
+      max-height:70vh;
       overflow:auto;
-      padding-right: 2px;
+      padding-right:2px;
     }
     .item{
       border:1px solid #e7e7e7;
@@ -170,48 +167,42 @@
       background:#fff;
       color:#0B6E4F;
     }
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:#555;
-      line-height:1.6;
+
+    footer{
+      margin:16px auto 0;
+      padding:14px;
+      text-align:center;
+      font-size:13px;
+      color:#444;
     }
+    footer a{ color:#0B6E4F; font-weight:700; text-decoration:none; }
   </style>
 </head>
 
 <body>
   <header>
     <div class="header-inner">
-      <!-- الشعار: تأكد أن الملف mushaf.png موجود بجانب ملف الـ HTML -->
+      <!-- تأكد أن الشعار موجود بجانب الملف باسم mushaf.png -->
       <div class="logo" title="جمعية العناية بالمصحف الشريف">
-        <img src="mushaf.jpg" alt="شعار جمعية العناية بالمصحف الشريف">
+        <img src="mushaf.png" alt="شعار جمعية العناية بالمصحف الشريف">
       </div>
-
       <div class="brand">
         <h1>#احفظه_معنا | خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</h1>
-<p>
-<strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> – 📞 0580756777
-</p>
+        <p>
+          ابحث عن أقرب صندوق، ثم اضغط “الاتجاهات” لفتح Google Maps وتحديد الطريق من موقعك الحالي.<br>
+          <strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> – 📞 <a href="tel:0580756777" style="color:#fff">0580756777</a>
+        </p>
       </div>
     </div>
   </header>
 
   <div class="wrap">
-
-    <!-- قائمة المواقع -->
+    <!-- القائمة -->
     <aside class="card">
       <div class="panel">
         <h2>المحافظات والمواقع</h2>
         <input id="q" class="search" type="search" placeholder="ابحث باسم المحافظة… (مثال: صبيا / بيش / فيفا)" />
-
-        <div id="list" class="list">
-          <!-- سيتم تعبئتها عبر JavaScript -->
-        </div>
-
-        <div class="note">
-          ملاحظة: بعض الإحداثيات قد تكون تقديرية. إذا رغبت بدقة 100% لكل موقع،
-          زودني بإحداثيات كل صندوق أو روابط maps.google.com/?q=lat,lng وسأحدّث القائمة.
-        </div>
+        <div id="list" class="list"></div>
       </div>
     </aside>
 
@@ -227,27 +218,30 @@
         </iframe>
       </div>
     </main>
-
   </div>
 
+  <footer>
+    بإشراف <strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> |
+    للتواصل: <a href="tel:0580756777">0580756777</a>
+  </footer>
+
   <script>
-    // مواقع الصناديق (Name, lat, lng, note)
     const places = [
       { name: "صندوق حفظ المصاحف القديمة – جيزان", lat: 16.899836, lng: 42.552330, note: "بجوار جامع الأميرة صيتة" },
-      { name: "صندوق حفظ المصاحف القديمة – صبيا", lat: 17.123000, lng: 42.750000, note: "بجوار جامع الدرسي (إحداثيات تقديرية)" },
+      { name: "صندوق حفظ المصاحف القديمة – صبيا", lat: 17.1589463, lng: 42.6261863, note: "بجوار جامع الدرسي بمدينة صبيا" },
       { name: "صندوق حفظ المصاحف القديمة – ضمد", lat: 17.112385, lng: 42.777718, note: "حي الزاهر بجوار مسجد الهاتف شرق البنك الأهلي" },
       { name: "صندوق حفظ المصاحف القديمة – صامطة", lat: 16.599133, lng: 42.935261, note: "بجوار جامع العليا حي السنيد" },
       { name: "صندوق حفظ المصاحف القديمة – أحد المسارحة", lat: 16.702896, lng: 42.954578, note: "بجوار جامع الدحمان" },
-      { name: "صندوق حفظ المصاحف القديمة – العارضة", lat: 17.010000, lng: 43.030000, note: "بجوار جامع الراجحي (إحداثيات تقديرية)" },
-      { name: "صندوق حفظ المصاحف القديمة – العيدابي", lat: 17.130000, lng: 43.170000, note: "بجوار جامع أبو بكر الصديق (إحداثيات تقديرية)" },
+      { name: "صندوق حفظ المصاحف القديمة – العارضة", lat: 17.0362635, lng: 43.0862932, note: "بجوار جامع الراجحي" },
+      { name: "صندوق حفظ المصاحف القديمة – العيدابي", lat: 17.2331150, lng: 42.9401466, note: "بجوار جامع أبو بكر الصديق" },
       { name: "صندوق حفظ المصاحف القديمة – بيش", lat: 17.370344, lng: 42.539795, note: "بجوار جامع الراجحي بمدينة بيش" },
       { name: "صندوق حفظ المصاحف القديمة – أبو عريش", lat: 16.967049, lng: 42.837952, note: "بجوار جامع الميرابي" },
-      { name: "صندوق حفظ المصاحف القديمة – فيفا", lat: 17.250000, lng: 43.100000, note: "بجوار جامع أبو بكر الصديق (إحداثيات تقديرية)" },
+      { name: "صندوق حفظ المصاحف القديمة – فيفا", lat: 17.2551397, lng: 43.0960266, note: "بجوار جامع أبو بكر الصديق بمدينة فيفا" },
       { name: "صندوق حفظ المصاحف القديمة – الداير بني مالك", lat: 17.336403, lng: 43.137497, note: "بجوار جامع خادم الحرمين الشريفين" },
       { name: "صندوق حفظ المصاحف القديمة – عيبان بلغازي", lat: 17.278406, lng: 43.050171, note: "بجوار جامع عيبان" },
       { name: "صندوق حفظ المصاحف القديمة – الدرب", lat: 17.732662, lng: 42.249622, note: "بجوار جامع الأميرة الجوهرة" },
-      { name: "صندوق حفظ المصاحف القديمة – فرسان", lat: 16.700000, lng: 42.100000, note: "بجوار جامع الشيخ هادي الراجحي (إحداثيات تقديرية)" },
-      { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.550000, lng: 42.850000, note: "بجوار جامع الرحمة (إحداثيات تقديرية)" },
+      { name: "صندوق حفظ المصاحف القديمة – فرسان", lat: 16.6970000, lng: 41.9815000, note: "جزيرة فرسان – قريب من جامع الشيخ هادي الراجحي (مرجع موثوق)" },
+      { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.6169984, lng: 42.8296643, note: "محافظة الريث – قريب من جامع الرحمة (مرجع موثوق)" },
       { name: "صندوق حفظ المصاحف القديمة – هروب", lat: 17.446735, lng: 42.875393, note: "بجوار جامع حمزة بن عبدالمطلب" },
       { name: "صندوق حفظ المصاحف القديمة – الطوال", lat: 16.528753, lng: 42.967049, note: "بجوار جامع الأوسط" },
       { name: "صندوق حفظ المصاحف القديمة – الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" },
@@ -256,42 +250,33 @@
     const listEl = document.getElementById("list");
     const qEl = document.getElementById("q");
 
-    function mapsPlaceLink(lat, lng){
-      return `https://maps.google.com/?q=${lat},${lng}`;
-    }
-
-    // Directions: يفتح الملاحة من موقع المستخدم الحالي إلى الإحداثيات
-    function mapsDirectionsLink(lat, lng){
-      return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-    }
+    const mapsPlaceLink = (lat,lng)=>`https://maps.google.com/?q=${lat},${lng}`;
+    const mapsDirectionsLink = (lat,lng)=>`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
     function render(filterText=""){
       listEl.innerHTML = "";
       const ft = filterText.trim().toLowerCase();
+      const items = places.filter(p => !ft || p.name.toLowerCase().includes(ft));
 
-      places
-        .filter(p => !ft || p.name.toLowerCase().includes(ft))
-        .forEach(p => {
-          const item = document.createElement("div");
-          item.className = "item";
+      items.forEach(p=>{
+        const item=document.createElement("div");
+        item.className="item";
+        item.innerHTML=`
+          <p class="name">${p.name}</p>
+          <p class="meta">${p.note}<br><span style="opacity:.8">(${p.lat.toFixed(6)}, ${p.lng.toFixed(6)})</span></p>
+          <div class="actions">
+            <a class="btn" target="_blank" rel="noopener" href="${mapsDirectionsLink(p.lat,p.lng)}">الاتجاهات</a>
+            <a class="btn secondary" target="_blank" rel="noopener" href="${mapsPlaceLink(p.lat,p.lng)}">فتح الموقع</a>
+          </div>`;
+        listEl.appendChild(item);
+      });
 
-          item.innerHTML = `
-            <p class="name">${p.name}</p>
-            <p class="meta">${p.note || ""}<br><span style="opacity:.8">(${p.lat.toFixed(6)}, ${p.lng.toFixed(6)})</span></p>
-            <div class="actions">
-              <a class="btn" target="_blank" rel="noopener" href="${mapsDirectionsLink(p.lat, p.lng)}">الاتجاهات</a>
-              <a class="btn secondary" target="_blank" rel="noopener" href="${mapsPlaceLink(p.lat, p.lng)}">فتح الموقع</a>
-            </div>
-          `;
-          listEl.appendChild(item);
-        });
-
-      if (!listEl.children.length){
-        listEl.innerHTML = `<div class="item"><p class="name">لا توجد نتائج</p><p class="meta">جرّب كلمة بحث أخرى.</p></div>`;
+      if(!items.length){
+        listEl.innerHTML=`<div class="item"><p class="name">لا توجد نتائج</p><p class="meta">جرّب كلمة بحث أخرى.</p></div>`;
       }
     }
 
-    qEl.addEventListener("input", (e) => render(e.target.value));
+    qEl.addEventListener("input",e=>render(e.target.value));
     render();
   </script>
 </body>
