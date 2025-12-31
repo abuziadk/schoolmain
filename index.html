@@ -4,24 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===== WhatsApp / Social Preview (الصورة الأخيرة) ===== -->
+  <!-- ===== WhatsApp / Social Preview (FINAL) ===== -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_SA">
-  <meta property="og:title" content="خريطة صناديق حفظ المصاحف القديمة - لجمعية العناية بالمصحف الشريف بمنطقة جازان">
-  <meta property="og:description" content="اعثر على أقرب صندوق لحفظ المصاحف القديمة التابعة لجمعية العناية بالمصحف الشريف بمنطقة جازان، واضغط الاتجاهات للوصول بسهولة.">
+  <meta property="og:title" content="خريطة صناديق حفظ المصاحف القديمة – منطقة جازان">
+  <meta property="og:description" content="خريطة تفاعلية لمواقع صناديق حفظ المصاحف القديمة التابعة لجمعية العناية بالمصحف الشريف بمنطقة جازان.">
   <meta property="og:url" content="https://abuziadk.github.io/schoolmain/">
-  <meta property="og:image" content="https://abuziadk.github.io/schoolmain/share.jpg">
-  <meta property="og:image:secure_url" content="https://abuziadk.github.io/schoolmain/share.jpg">
+
+  <meta property="og:image" content="https://abuziadk.github.io/schoolmain/og.jpg">
+  <meta property="og:image:secure_url" content="https://abuziadk.github.io/schoolmain/og.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="صناديق حفظ المصاحف القديمة – جمعية العناية بالمصحف الشريف بجازان">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="خريطة صناديق حفظ المصاحف القديمة – جازان">
-  <meta name="twitter:description" content="خريطة تفاعلية لمواقع صناديق حفظ المصاحف القديمة في منطقة جازان.">
-  <meta name="twitter:image" content="https://abuziadk.github.io/schoolmain/share.jpg">
+  <meta name="twitter:image" content="https://abuziadk.github.io/schoolmain/og.jpg">
 
-  <title>خريطة صناديق حفظ المصاحف القديمة - لجمعية العناية بالمصحف الشريف بمنطقة جازان</title>
+  <title>خريطة صناديق حفظ المصاحف القديمة – جمعية العناية بالمصحف الشريف بمنطقة جازان</title>
 
   <style>
     :root{
@@ -142,20 +142,10 @@
       font-weight:900;
     }
 
-    /* ===== Mobile Optimization ===== */
     @media (max-width:520px){
-      .header-inner{
-        padding:10px 12px;
-        align-items:flex-start;
-      }
-      .media-card{
-        width:58px;
-        height:58px;
-      }
-      h1{ font-size:15px; }
-      .sub{ font-size:12.5px; }
-      .badge{ font-size:11px; }
-      .pill{ font-size:11.5px; }
+      .header-inner{padding:10px 12px;}
+      .media-card{width:58px;height:58px;}
+      h1{font-size:15px;}
     }
 
     /* ================= LAYOUT ================= */
@@ -169,7 +159,7 @@
     }
 
     @media (max-width:950px){
-      .wrap{ grid-template-columns:1fr; }
+      .wrap{grid-template-columns:1fr;}
     }
 
     .card{
@@ -179,7 +169,7 @@
       overflow:hidden;
     }
 
-    .panel{ padding:12px; }
+    .panel{padding:12px;}
 
     .panel h2{
       margin:0 0 10px;
@@ -195,12 +185,6 @@
       border-radius:12px;
       font-size:14px;
       margin-bottom:10px;
-      outline:none;
-      box-sizing:border-box;
-    }
-    .search:focus{
-      border-color: rgba(11,110,79,.55);
-      box-shadow: 0 0 0 4px rgba(11,110,79,.10);
     }
 
     .list{
@@ -209,7 +193,6 @@
       gap:10px;
       max-height:62vh;
       overflow:auto;
-      padding-right:2px;
     }
 
     .item{
@@ -222,15 +205,13 @@
     .item .name{
       font-weight:900;
       font-size:14px;
-      margin:0 0 4px;
-      line-height:1.5;
+      margin-bottom:4px;
     }
 
     .item .meta{
       font-size:13px;
       color:var(--muted);
-      margin:0 0 8px;
-      line-height:1.6;
+      margin-bottom:8px;
     }
 
     .actions{
@@ -248,7 +229,6 @@
       font-weight:900;
       text-decoration:none;
       border:1px solid var(--green);
-      display:inline-block;
     }
 
     .btn.secondary{
@@ -276,13 +256,6 @@
       text-align:center;
       font-size:13px;
       color:#444;
-      padding:0 12px 14px;
-    }
-    footer a{
-      color:var(--green);
-      font-weight:900;
-      text-decoration:none;
-      border-bottom:1px dashed rgba(11,110,79,.55);
     }
   </style>
 </head>
@@ -291,49 +264,40 @@
 
 <header>
   <div class="header-inner">
-    <!-- يسار: صورة الصندوق (غيّر الاسم إذا لزم) -->
-    <div class="media-card" title="صندوق جمع المصاحف">
+    <div class="media-card">
       <img src="mushaf.jpg" alt="صندوق جمع المصاحف">
     </div>
 
-    <!-- وسط: النص -->
     <div class="brand">
       <span class="badge">#احفظه_معنا</span>
       <h1>خريطة صناديق حفظ المصاحف القديمة – منطقة جازان</h1>
-      <p class="sub">ابحث عن أقرب صندوق، ثم اضغط “الاتجاهات” لفتح Google Maps وتحديد الطريق من موقعك الحالي.</p>
       <div class="contact">
-        <span class="pill">جمعية العناية بالمصحف الشريف بمنطقة جازان</span>
+        <span class="pill">جمعية العناية بالمصحف الشريف – جازان</span>
         <span class="pill">📞 <a href="tel:0580756777">0580756777</a></span>
       </div>
     </div>
 
-    <!-- يمين: شعار الجمعية (غيّر الاسم إذا لزم) -->
-    <div class="media-card logo" title="شعار الجمعية">
-      <img src="Box.jpg" alt="شعار جمعية العناية بالمصحف الشريف">
+    <div class="media-card logo">
+      <img src="Box.jpg" alt="شعار الجمعية">
     </div>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- القائمة -->
   <aside class="card">
     <div class="panel">
       <h2>المحافظات والمواقع</h2>
-      <input id="q" class="search" type="search" placeholder="ابحث باسم المحافظة… (مثال: صبيا / بيش / فيفا)" />
+      <input id="q" class="search" placeholder="ابحث باسم المحافظة…" />
       <div id="list" class="list"></div>
     </div>
   </aside>
 
-  <!-- الخريطة -->
   <main class="card">
     <div class="map">
       <iframe
         src="https://www.google.com/maps/d/u/0/embed?mid=1QE5-MUYNlbb9j7j3kiTLEBJb1MlTVNc"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="خريطة صناديق حفظ المصاحف القديمة – منطقة جازان">
+        loading="lazy">
       </iframe>
     </div>
   </main>
@@ -341,77 +305,47 @@
 </div>
 
 <footer>
-  بإشراف <strong>جمعية العناية بالمصحف الشريف بمنطقة جازان</strong> |
-  للتواصل: <a href="tel:0580756777">0580756777</a>
+  بإشراف جمعية العناية بالمصحف الشريف بمنطقة جازان
 </footer>
 
 <script>
-  // ===================== DATA =====================
   const places = [
-    { name: "صندوق حفظ المصاحف القديمة – جيزان", lat: 16.899836, lng: 42.552330, note: "بجوار جامع الأميرة صيتة" },
-    { name: "صندوق حفظ المصاحف القديمة – صبيا", lat: 17.1589463, lng: 42.6261863, note: "بجوار جامع الدرسي بمدينة صبيا" },
-    { name: "صندوق حفظ المصاحف القديمة – ضمد", lat: 17.112385, lng: 42.777718, note: "حي الزاهر بجوار مسجد الهاتف شرق البنك الأهلي" },
-    { name: "صندوق حفظ المصاحف القديمة – صامطة", lat: 16.599133, lng: 42.935261, note: "بجوار جامع العليا حي السنيد" },
-    { name: "صندوق حفظ المصاحف القديمة – أحد المسارحة", lat: 16.702896, lng: 42.954578, note: "بجوار جامع الدحمان" },
-    { name: "صندوق حفظ المصاحف القديمة – العارضة", lat: 17.0362635, lng: 43.0862932, note: "بجوار جامع الراجحي" },
-    { name: "صندوق حفظ المصاحف القديمة – العيدابي", lat: 17.2331150, lng: 42.9401466, note: "بجوار جامع أبو بكر الصديق" },
-    { name: "صندوق حفظ المصاحف القديمة – بيش", lat: 17.370344, lng: 42.539795, note: "بجوار جامع الراجحي بمدينة بيش" },
-    { name: "صندوق حفظ المصاحف القديمة – أبو عريش", lat: 16.967049, lng: 42.837952, note: "بجوار جامع الميرابي" },
-    { name: "صندوق حفظ المصاحف القديمة – فيفا", lat: 17.2551397, lng: 43.0960266, note: "بجوار جامع أبو بكر الصديق بمدينة فيفا" },
-    { name: "صندوق حفظ المصاحف القديمة – الداير بني مالك", lat: 17.336403, lng: 43.137497, note: "بجوار جامع خادم الحرمين الشريفين" },
-    { name: "صندوق حفظ المصاحف القديمة – عيبان بلغازي", lat: 17.278406, lng: 43.050171, note: "بجوار جامع عيبان" },
-    { name: "صندوق حفظ المصاحف القديمة – الدرب", lat: 17.732662, lng: 42.249622, note: "بجوار جامع الأميرة الجوهرة" },
-    { name: "صندوق حفظ المصاحف القديمة – فرسان", lat: 16.701607, lng: 42.122436, note: "فرسان – جامع الشيخ هادي الراجحي" },
-    { name: "صندوق حفظ المصاحف القديمة – الريث", lat: 17.637195, lng: 42.822291, note: "الريث – جامع الرحمة" },
-    { name: "صندوق حفظ المصاحف القديمة – هروب", lat: 17.446735, lng: 42.875393, note: "بجوار جامع حمزة بن عبدالمطلب" },
-    { name: "صندوق حفظ المصاحف القديمة – الطوال", lat: 16.528753, lng: 42.967049, note: "بجوار جامع الأوسط" },
-    { name: "صندوق حفظ المصاحف القديمة – الحرث", lat: 16.829000, lng: 42.955727, note: "إسكان الحصمة بجوار إدارة المساجد" }
+    {name:"جيزان",lat:16.899836,lng:42.55233,note:"جامع الأميرة صيتة"},
+    {name:"صبيا",lat:17.1589463,lng:42.6261863,note:"جامع الدرسي"},
+    {name:"ضمد",lat:17.112385,lng:42.777718,note:"مسجد الهاتف"},
+    {name:"صامطة",lat:16.599133,lng:42.935261,note:"جامع العليا"},
+    {name:"أحد المسارحة",lat:16.702896,lng:42.954578,note:"جامع الدحمان"},
+    {name:"العارضة",lat:17.0362635,lng:43.0862932,note:"جامع الراجحي"},
+    {name:"العيدابي",lat:17.2331150,lng:42.9401466,note:"جامع أبو بكر الصديق"},
+    {name:"بيش",lat:17.370344,lng:42.539795,note:"جامع الراجحي"},
+    {name:"أبو عريش",lat:16.967049,lng:42.837952,note:"جامع الميرابي"},
+    {name:"فيفا",lat:17.2551397,lng:43.0960266,note:"جامع أبو بكر الصديق"},
+    {name:"الدرب",lat:17.732662,lng:42.249622,note:"جامع الأميرة الجوهرة"},
+    {name:"فرسان",lat:16.701607,lng:42.122436,note:"جامع الشيخ هادي الراجحي"},
+    {name:"الريث",lat:17.637195,lng:42.822291,note:"جامع الرحمة"}
   ];
 
-  // ===================== UI =====================
-  const listEl = document.getElementById("list");
-  const qEl = document.getElementById("q");
+  const list=document.getElementById("list");
+  const q=document.getElementById("q");
 
-  function mapsPlaceLink(lat, lng){
-    return `https://maps.google.com/?q=${lat},${lng}`;
-  }
-  function mapsDirectionsLink(lat, lng){
-    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-  }
+  const dir=(lat,lng)=>`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+  const place=(lat,lng)=>`https://maps.google.com/?q=${lat},${lng}`;
 
-  function render(filterText=""){
-    listEl.innerHTML = "";
-    const ft = filterText.trim().toLowerCase();
-
-    const results = places.filter(p =>
-      !ft ||
-      p.name.toLowerCase().includes(ft) ||
-      (p.note||"").toLowerCase().includes(ft)
-    );
-
-    results.forEach(p => {
-      const item = document.createElement("div");
-      item.className = "item";
-      item.innerHTML = `
-        <p class="name">${p.name}</p>
-        <p class="meta">${p.note}<br><span style="opacity:.8">(${p.lat.toFixed(6)}, ${p.lng.toFixed(6)})</span></p>
-        <div class="actions">
-          <a class="btn" target="_blank" rel="noopener" href="${mapsDirectionsLink(p.lat, p.lng)}">الاتجاهات</a>
-          <a class="btn secondary" target="_blank" rel="noopener" href="${mapsPlaceLink(p.lat, p.lng)}">فتح الموقع</a>
-        </div>
-      `;
-      listEl.appendChild(item);
+  function render(v=""){
+    list.innerHTML="";
+    places.filter(p=>p.name.includes(v)).forEach(p=>{
+      list.innerHTML+=`
+        <div class="item">
+          <div class="name">${p.name}</div>
+          <div class="meta">${p.note}</div>
+          <div class="actions">
+            <a class="btn" target="_blank" href="${dir(p.lat,p.lng)}">الاتجاهات</a>
+            <a class="btn secondary" target="_blank" href="${place(p.lat,p.lng)}">فتح الموقع</a>
+          </div>
+        </div>`;
     });
-
-    if(!results.length){
-      listEl.innerHTML = `<div class="item">
-        <p class="name">لا توجد نتائج</p>
-        <p class="meta">جرّب كلمة بحث أخرى.</p>
-      </div>`;
-    }
   }
-
-  qEl.addEventListener("input", (e) => render(e.target.value));
+  q.oninput=e=>render(e.target.value);
   render();
 </script>
 
